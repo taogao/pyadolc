@@ -27,10 +27,16 @@ bp::list	wrapped_sparse_jac_repeat(short tape_tag, bpn::array &bpn_x, npy_intp n
 bp::list	wrapped_sparse_hess_no_repeat(short tape_tag, bpn::array &bpn_x, bpn::array &bpn_options);
 bp::list	wrapped_sparse_hess_repeat(short tape_tag, bpn::array &bpn_x, npy_intp nnz, bpn::array &bpn_rind, bpn::array &bpn_cind, bpn::array &bpn_values);
 
+
+int init_numpy(){
+	import_array();
+}
+
 BOOST_PYTHON_MODULE(_colpack)
 {
 	using namespace boost::python;
-	import_array(); 										/* some kind of hack to get numpy working */
+	// import_array(); 										#<{(| some kind of hack to get numpy working |)}>#
+	init_numpy();
 	bpn::array::set_module_and_type("numpy", "ndarray");	/* some kind of hack to get numpy working */
 	def("sparse_jac_no_repeat",  &wrapped_sparse_jac_no_repeat);
 	def("sparse_jac_repeat",  &wrapped_sparse_jac_repeat);

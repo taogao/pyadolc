@@ -31,13 +31,16 @@ bp::list	wrapped_hess_pat(short tape_tag, bpn::array &bpn_x, npy_intp option);
 
 
 
-
+int init_array(){
+	import_array();
+}
 
 
 BOOST_PYTHON_MODULE(_sparse)
 {
 	using namespace boost::python;
-	import_array(); 										/* some kind of hack to get numpy working */
+	// import_array(); 										#<{(| some kind of hack to get numpy working |)}>#
+	init_array();
 	bpn::array::set_module_and_type("numpy", "ndarray");	/* some kind of hack to get numpy working */
 	def("jac_pat", 	             &wrapped_jac_pat);
 	// def("sparse_jac_no_repeat",  &wrapped_sparse_jac_no_repeat);

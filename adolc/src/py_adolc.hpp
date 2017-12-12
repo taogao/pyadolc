@@ -202,11 +202,16 @@ badouble& (badouble::*operator_eq_double) ( double ) = &badouble::operator=;
 badouble& (badouble::*operator_eq_badouble) ( const badouble& ) = &badouble::operator=;
 badouble& (badouble::*operator_eq_adub) ( const adub& ) = &badouble::operator=;
 
+int init_numpy(){
+	import_array();
+}
+
 
 BOOST_PYTHON_MODULE(_adolc)
 {
 	using namespace boost::python;
-	import_array(); 										/* some kind of hack to get numpy working */
+	// import_array(); 										#<{(| some kind of hack to get numpy working |)}>#
+	init_numpy();
 	bpn::array::set_module_and_type("numpy", "ndarray");	/* some kind of hack to get numpy working */
 
 	scope().attr("__doc__") ="unused: moved docstring to adolc.py";

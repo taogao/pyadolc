@@ -46,11 +46,11 @@ include_dirs = [get_numpy_include_dirs()[0], boost_include_path, adolc_include_p
 library_dirs = [boost_library_path1, boost_library_path2, adolc_library_path1, adolc_library_path2, colpack_lib_path1, colpack_lib_path2]
 libraries = ['boost_python','adolc', 'ColPack']
 
-print ''
-print '\033[1;31mPlease check that the following settings are correct for your system:\n\033[1;m'
-print 'include_dirs = %s\n'%str(include_dirs)
-print 'library_dirs = %s\n'%str(library_dirs)
-print '''
+print('')
+print('\033[1;31mPlease check that the following settings are correct for your system:\n\033[1;m')
+print('include_dirs = %s\n'%str(include_dirs))
+print('library_dirs = %s\n'%str(library_dirs))
+print('''
 If ADOL-C or Colpack cannot be found, you can manually set the paths via
 ``export ADOLC_DIR=/path/to/adol-c`` and ``export COLPACK_DIR=/path/to/colpack``
 
@@ -64,8 +64,8 @@ Example:
 
     CC=clang CXX=clang++ python setup.py
 
-'''
-raw_input("Press enter to build pyadolc.")
+''')
+input("Press enter to build pyadolc.")
 
 
 # PACKAGE INFORMATION
@@ -88,7 +88,7 @@ LONG_DESCRIPTION    = "\n".join(DOCLINES[2:])
 URL                 = "http://www.github.com/b45ch1/pyadolc"
 DOWNLOAD_URL        = "http://www.github.com/b45ch1/pyadolc"
 LICENSE             = 'BSD'
-CLASSIFIERS         = filter(None, CLASSIFIERS.split('\n'))
+CLASSIFIERS         = [_f for _f in CLASSIFIERS.split('\n') if _f]
 AUTHOR              = "Sebastian F. Walter"
 AUTHOR_EMAIL        = "sebastian.walter@gmail.com"
 PLATFORMS           = ["Linux"]
@@ -102,7 +102,7 @@ VERSION             = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 # override default setup.py help output
 import sys
 if len(sys.argv) == 1:
-    print """
+    print("""
 
     \033[1;31mYou didn't enter what to do!\n\033[1;m
 
@@ -121,7 +121,7 @@ if len(sys.argv) == 1:
 
 
     Remark: This is an override of the default behaviour of the distutils setup.
-    """
+    """)
     exit()
 
 class clean(Command):
